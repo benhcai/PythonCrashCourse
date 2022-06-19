@@ -1,0 +1,18 @@
+import requests
+
+url = 'https://api.github.com/search/repositories?q=language:python&sort=stars'
+r = requests.get(url)
+response_dict = r.json()
+repo_items = response_dict['items']
+print(len(repo_items))
+
+def print_select_data(repo):
+    print('\nName:', repo['name']) 
+    print('Owner:', repo['owner']['login']) 
+    print('Stars:', repo['stargazers_count']) 
+    print('Repository:', repo['html_url']) 
+    print('Description:', repo['description'])
+    print('Downloads:', repo['has_downloads'])
+
+for repo in repo_items:
+    print_select_data(repo)
